@@ -1,17 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import styles from "./login.module.css";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../img/loading.gif";
 import LogoPreserve from "../../img/logo-preserve.png";
+import { UserContext } from "../../context/userContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(false);
 
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
