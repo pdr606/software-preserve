@@ -24,6 +24,7 @@ function Login() {
         password,
       });
       setUser(res);
+      localStorage.setItem('token', res.data.token)
     } catch (error) {
       setMessage("Ocorreu um erro ao entrar na plataforma");
     } finally {
@@ -48,6 +49,7 @@ function Login() {
   useEffect(() => {
     if (user) {
       navigate("/home");
+      
     }
   }, [user, navigate]);
 
