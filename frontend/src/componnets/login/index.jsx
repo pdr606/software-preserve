@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import styles from "./login.module.css";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../img/loading.gif";
 import LogoPreserve from "../../img/logo-preserve.png";
 import { UserContext } from "../../context/userContext";
+import api from "../../services/api";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -19,12 +19,12 @@ function Login() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:3033/login", {
+      const res = await api.post("/login", {
         email,
         password,
       });
       setUser(res);
-      localStorage.setItem('token', res.data.token)
+      localStorage.setItem("token", res.data.token);
     } catch (error) {
       setMessage("Ocorreu um erro ao entrar na plataforma");
     } finally {
@@ -49,7 +49,6 @@ function Login() {
   useEffect(() => {
     if (user) {
       navigate("/home");
-      
     }
   }, [user, navigate]);
 

@@ -1,0 +1,35 @@
+.Card {
+  background-color: white;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+  height: 300px;
+}
+
+.Card strong {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  margin-top: 1%;
+}
+
+.Card textarea {
+  width: 96%;
+  margin: 2%;
+  height: 79%;
+  padding: 5px;
+}
+
+.Card textarea:focus {
+  outline: none;
+}
+
+.Trash {
+  margin: 2%;
+  color: gray;
+  cursor: pointer;
+}
+
+.Trash:hover {
+  color: rgb(61, 58, 58);
+}
