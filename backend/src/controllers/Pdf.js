@@ -32,8 +32,6 @@ module.exports = {
       printBackground: true,
     });
 
-    fs.writeFileSync("temp.pdf", pdfBuffer);
-
     try {
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
