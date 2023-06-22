@@ -25,7 +25,7 @@ function App() {
             path="/treinamentos/checklist"
             element={
               <PrivateProvider>
-                <Checklist/>
+                <Checklist />
               </PrivateProvider>
             }
           />
@@ -33,15 +33,15 @@ function App() {
             path="/treinamentos/cronograma"
             element={
               <PrivateProvider>
-                <Cronograma/>
+                <Cronograma />
               </PrivateProvider>
             }
           />
           <Route
-            path="/treinamentos/orçamento"
+            path="/treinamentos/orcamento"
             element={
               <PrivateProvider>
-                <Orcamento/>
+                <Orcamento />
               </PrivateProvider>
             }
           />
