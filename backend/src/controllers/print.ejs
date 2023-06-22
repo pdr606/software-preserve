@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orçamento</title>
+    <style></style>
+  </head>
+  <body>
+    <h1>Relatório de Orçamento</h1>
+    <p><strong>Nome:</strong> <%= formValues.nome %></p>
+    <p><strong>Email:</strong> <%= formValues.email %></p>
+    <p><strong>Mensagem:</strong> <%= formValues.mensagem %></p>
+    <p><strong>Alunos:</strong> <%= formValues.alunos %></p>
+    <p><strong>Horas:</strong> <%= formValues.horas %></p>
+    <p><strong>Curso:</strong> <%= curso %></p>
+    <p><strong>Preço:</strong> <%= total %></p>
+
+    <% if (curso === 'BRIGADA') { %>
+    <p>Conteúdo específico para o curso BRIGADA</p>
+    <% } %>
+  </body>
+</html>
