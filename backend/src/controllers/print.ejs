@@ -4,20 +4,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Orçamento</title>
-    <style></style>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      
+
+    </style>
   </head>
   <body>
-    <h1>Relatório de Orçamento</h1>
-    <p><strong>Nome:</strong> <%= formValues.nome %></p>
-    <p><strong>Email:</strong> <%= formValues.email %></p>
-    <p><strong>Mensagem:</strong> <%= formValues.mensagem %></p>
-    <p><strong>Alunos:</strong> <%= formValues.alunos %></p>
-    <p><strong>Horas:</strong> <%= formValues.horas %></p>
-    <p><strong>Curso:</strong> <%= curso %></p>
-    <p><strong>Preço:</strong> <%= total %></p>
+    <main>
+      <h1>Orçamento Treinamento</h1>
+      <hr>
+      <div>
+        <h2>Preserve Soluções em Segurança</h2>
+        <p>Empresa: Preserve Soluções em Segurança</p>
+        <p>CNPJ: 19.669.846/0001-47</p>
+        <p>Endereço: Avenida Doutor Jose Antonio Palmeira da Silva - 631</p>
+        <p>Bairro: Três Barras</p>
+        <p>CEP: 29907-023</p>
+        <p>Município: Linhares</p>
+        <p>Estado: Espiríto Santo</p>
+        <hr>
+      </div>
+      <div>
+        <h2>Orçamento</h2>
+        <p><strong>Nome:</strong> <%= formValues.nome %></p>
+        <p><strong>Email:</strong> <%= formValues.email %></p>
+        <p><strong>Mensagem:</strong> <%= formValues.mensagem %></p>
+        <p><strong>Alunos(quantidade):</strong> <%= formValues.alunos %></p>
+        <p><strong>Horas:</strong> <%= formValues.horas %></p>
+        <p><strong>Curso:</strong> <%= curso %></p>
+        <p><strong>Preço:</strong> <%= total %></p>
+      </div>
+      <div>
+
+      </div>
+    </main>
+    
 
     <% if (curso === 'BRIGADA') { %>
-    <p>Conteúdo específico para o curso BRIGADA</p>
+    <p><strong>Macacões:</strong> <%= formValues.macacoes %> </p>
+    <p><strong>Gasolina:</strong> <%= formValues.gasolina %> Litros </p>
+    <p><strong>Diesel(quantidade):</strong> <%= formValues.diesel %> Litros </p>
+    <p><strong>Extintores(quantidade):</strong> <%= formValues.extintores %> </p>
+    <p><strong>Preço:</strong> R$ <%= total %></p>
+    <hr>
     <% } %>
   </body>
 </html>
