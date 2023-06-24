@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import api from "../../../services/api";
 import Notes from "../../../hook/notes";
+import Header from "../../../hook/header";
 
 function Cronograma() {
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
   const [allNotes, setAllNotes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem("token");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +17,12 @@ function Cronograma() {
     const response = await api.post("/annotations", {
       title,
       notes,
+    }, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     });
+    
 
     setTitle("");
     setNotes("");
@@ -23,8 +30,6 @@ function Cronograma() {
   };
 
   const handleDelete = async (id) => {
-    const token = localStorage.getItem("token");
-    console.log(token);
 
     try {
       setLoading(true);
@@ -41,16 +46,23 @@ function Cronograma() {
     }
   };
 
-  const getAllNotes = async () => {
-    const response = await api.get("/annotations");
-    setAllNotes(response.data);
-  };
-
   useEffect(() => {
+    const getAllNotes = async () => {
+      const response = await api.get("/annotations", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setAllNotes(response.data);
+    };
+  
     getAllNotes();
-  }, []);
+  }, [token]);
+  
 
   return (
+    <>
+    <Header/>
     <main className={styles.ContainerPai}>
       <div className={styles.ContainerFilho}>
         <div className={styles.ContainerLeft}>
@@ -85,6 +97,7 @@ function Cronograma() {
         </div>
       </div>
     </main>
+    </>
   );
 }
 

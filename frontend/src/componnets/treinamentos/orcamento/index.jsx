@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import Select from "../../../hook/select";
+import styles from './styles.module.css'
+import Loading from '../../../img/Loading.gif'
+import Header from "../../../hook/header";
 
 function Orcamento() {
   const [curso, setCurso] = useState("");
   const [total, setTotal] = useState("0");
+  const [loading, setLoading] = useState(false)
 
   const [formValues, setFormValue] = useState({
-    nome: "",
+    solicitante: "",
     email: "",
-    mensagem: "",
+    observacao: "",
     alunos: "",
     horas: "",
     macacoes: "",
@@ -38,6 +42,14 @@ function Orcamento() {
       let totalComAumento =
         totalBrigada + (totalBrigada * formValues.porcentagem) / 100;
       setTotal(totalComAumento.toLocaleString("pt-BR"));
+    } else{
+      let totalAlunos = +formValues.alunos * 130;
+      let totalHoras = +formValues.horas * 30;
+      
+      let totalTreinamento = totalAlunos + totalHoras
+      let totalComAumento = totalTreinamento + (totalTreinamento * formValues.porcentagem) / 100
+      setTotal(totalComAumento.toLocaleString("pt-BR"))
+
     }
   }, [curso, formValues]);
 
@@ -45,11 +57,14 @@ function Orcamento() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
     try {
+      setLoading(true)
       const response = await fetch("http://localhost:3033/gerarpdf", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           formValues,
@@ -57,6 +72,7 @@ function Orcamento() {
           total,
         }),
       });
+
 
       const contentType = response.headers.get("content-type");
 
@@ -73,19 +89,36 @@ function Orcamento() {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false)
+      setFormValue({
+        solicitante: "",
+        email: "",
+        observacao: "",
+        alunos: "",
+        horas: "",
+        macacoes: "",
+        gasolina: "",
+        diesel: "",
+        porcentagem: "",
+        extintores: "",
+      })
+      setCurso('Cursos')
     }
   };
 
   return (
-    <div>
+    <div className={styles.Container} >
       <>
-        <form onSubmit={handleSubmit}>
+      <Header/>
+        <form className={styles.Formulario} onSubmit={handleSubmit}>
+          <div className={styles.ContainerForm} >
           <input
-            value={formValues.nome}
+            value={formValues.solicitante}
             onChange={({ target }) =>
-              setFormValue({ ...formValues, nome: target.value })
+              setFormValue({ ...formValues, solicitante: target.value })
             }
-            placeholder="Nome"
+            placeholder="Solicitante"
           />
           <input
             value={formValues.email}
@@ -95,13 +128,14 @@ function Orcamento() {
             placeholder="E-mail"
           />
           <input
-            value={formValues.mensagem}
+            value={formValues.observacao}
             onChange={({ target }) =>
-              setFormValue({ ...formValues, mensagem: target.value })
+              setFormValue({ ...formValues, observacao: target.value })
             }
-            placeholder="Mensagem"
+            placeholder="Obervação"
           />
           <Select
+          className={styles.Select}
             text={"Cursos"}
             options={[
               "NR-05",
@@ -187,7 +221,8 @@ function Orcamento() {
             placeholder="Porcentagem de Lucro"
           />
           <p>R$ {total}</p>
-          <button type="submit">Gerar Orçamento</button>
+          {loading ? <img src={Loading} /> : <button type="submit">Gerar Orçamento</button>}
+          </div>
         </form>
       </>
     </div>

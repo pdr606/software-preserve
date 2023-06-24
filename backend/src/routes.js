@@ -13,11 +13,11 @@ routes.post("/register", Register.register);
 routes.post("/login", Login.login);
 routes.get("/private/:id", checkToken, Private.private);
 
-routes.get("/annotations", Annotation.read);
-routes.post("/annotations", Annotation.create);
+routes.get("/annotations", checkToken, Annotation.read);
+routes.post("/annotations", checkToken, Annotation.create);
 routes.delete("/annotations/:id", checkToken, Annotation.delete);
-routes.post("/annotations/update/:id", Annotation.update);
+routes.post("/annotations/update/:id", checkToken, Annotation.update);
 
-routes.post("/gerarpdf", PdfCreate.generatePdf);
+routes.post("/gerarpdf", checkToken, PdfCreate.generatePdf);
 
 module.exports = routes;

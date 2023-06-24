@@ -6,10 +6,21 @@
     <title>Orçamento</title>
     <style>
       *{
-        margin: 0;
+        margin: 15px;
         padding: 0;
         box-sizing: border-box;
         font-family: Arial, Helvetica, sans-serif;
+      }
+      
+      h1{
+        text-align: center;
+        padding: 10px;
+      }
+
+      .Container{
+        padding: 10px;
+        margin-bottom: 10px;
+
       }
 
       
@@ -18,9 +29,10 @@
   </head>
   <body>
     <main>
-      <h1>Orçamento Treinamento</h1>
+      <h1 >Orçamento Treinamento</h1>
+      
       <hr>
-      <div>
+      <div class="Container" >
         <h2>Preserve Soluções em Segurança</h2>
         <p>Empresa: Preserve Soluções em Segurança</p>
         <p>CNPJ: 19.669.846/0001-47</p>
@@ -31,15 +43,26 @@
         <p>Estado: Espiríto Santo</p>
         <hr>
       </div>
-      <div>
+      <div class="Container" >
         <h2>Orçamento</h2>
-        <p><strong>Nome:</strong> <%= formValues.nome %></p>
-        <p><strong>Email:</strong> <%= formValues.email %></p>
-        <p><strong>Mensagem:</strong> <%= formValues.mensagem %></p>
-        <p><strong>Alunos(quantidade):</strong> <%= formValues.alunos %></p>
-        <p><strong>Horas:</strong> <%= formValues.horas %></p>
-        <p><strong>Curso:</strong> <%= curso %></p>
-        <p><strong>Preço:</strong> <%= total %></p>
+        <p>Solicitante: <%= formValues.solicitante %></p>
+        <p>Email: <%= formValues.email %></p>
+        <p>Alunos(quantidade): <%= formValues.alunos %></p>
+        <p>Horas: <%= formValues.horas %></p>
+        <p>Curso: <%= curso %></p>
+        <p>Observação: <%= formValues.observacao %></p>
+        <% if (curso !== 'BRIGADA') { %>
+        <p>Preço: R$ <%= total %></p>
+        <hr>
+        <% } %>
+        <% if (curso === 'BRIGADA') { %>
+          <p>Macacões: <%= formValues.macacoes %> </p>
+          <p>Gasolina: <%= formValues.gasolina %> Litros </p>
+          <p>Diesel(quantidade): <%= formValues.diesel %> Litros </p>
+          <p>Extintores(quantidade): <%= formValues.extintores %> </p>
+          <p>Preço: R$ <%= total %></p>
+          <hr>
+          <% } %>
       </div>
       <div>
 
@@ -47,13 +70,6 @@
     </main>
     
 
-    <% if (curso === 'BRIGADA') { %>
-    <p><strong>Macacões:</strong> <%= formValues.macacoes %> </p>
-    <p><strong>Gasolina:</strong> <%= formValues.gasolina %> Litros </p>
-    <p><strong>Diesel(quantidade):</strong> <%= formValues.diesel %> Litros </p>
-    <p><strong>Extintores(quantidade):</strong> <%= formValues.extintores %> </p>
-    <p><strong>Preço:</strong> R$ <%= total %></p>
-    <hr>
-    <% } %>
+
   </body>
 </html>

@@ -7,12 +7,18 @@ import Loading from "../../img/loading2.gif";
 
 function Notes({ data, handleDelete, loading }) {
   const [changedNote, setChangedNote] = useState("");
+  const token = localStorage.getItem("token");
 
   async function handleSave(e, notes) {
     if (changedNote && changedNote !== notes) {
       await api.post(`annotations/update/${data._id}`, {
         notes: changedNote,
+      }, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
       });
+      
     }
   }
 

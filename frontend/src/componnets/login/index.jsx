@@ -58,8 +58,9 @@ function Login() {
 
   return (
     <main className={styles.containerPai}>
-      <div className={styles.containerFilho}>
+      <div className={styles.containerFilho}>  
         <div className={styles.containerInput}>
+        <h1>Administração</h1>
           <input
             type="email"
             name="email"
@@ -77,9 +78,11 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             onKeyUpCapture={(e) => handleKey(e)}
           ></input>
-          <button onClick={handleSubmit}>Login</button>
+          <button onClick={handleSubmit}>Entrar</button>
           {loading ? (
-            <img className={styles.Loading} src={Loading} alt="Gif Loading" />
+            <div className={styles.Loading} >
+              <img  src={Loading} alt="Gif Loading" />
+            </div>
           ) : (
             <img
               className={styles.LogoPreserve}
