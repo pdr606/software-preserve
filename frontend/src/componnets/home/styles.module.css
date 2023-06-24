@@ -20,45 +20,64 @@
     font-weight: 300;
 }
 
+.Menu{
+    text-align: center;
+    margin: auto;
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Menu h2{
+    padding-right: 10px;
+    font-size: 50px;
+    font-weight: 300;
+}
+
+
 .Icon{
     font-size: 25px;
 }
 
 .ContainerCard{
-    background-color: #0d2c8131;
     height: 800px;
     margin-left: 5%;
     margin-right: 5%;
-    margin-top: 20px;
+    margin-top: 5px;
     display: flex;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 .Card{
-    background-color: white;
+    background-color:#0d2b81;
     width: 200px;
     height: 200px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-left: 5%;
-    margin-top: 5%;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    margin-top: 3%;
+    border-radius: 20px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
     
 }
 
+.Icon{
+    font-size: 70px;
+    color: white;
+}
+
 .Card:hover{
     transition: 0.6s;
-    background-color: #0d2c8170;
+    background-color:#0d2c81da;
 }
 
 .CardLink{
     text-decoration: none;
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 23px;
     display: flex;
     align-items: center;
     justify-content: center;

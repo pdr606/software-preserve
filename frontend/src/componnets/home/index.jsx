@@ -1,6 +1,7 @@
 
 import { Link } from 'react-router-dom';
-import {GiChecklist} from 'react-icons/gi'
+import {GoChecklist} from 'react-icons/go'
+import {MdViewTimeline , MdOutlineAttachMoney} from 'react-icons/md'
 
 import styles from './styles.module.css'
 import Header from '../../hook/header';
@@ -10,16 +11,23 @@ function Home() {
     <>
       <main className={styles.Container} >
         <Header/>
+        <div className={styles.Menu} >
+        <h2>- Menu do sistema -</h2>
+        </div>
+          
         
         <div className={styles.ContainerCard}>
           <div className={styles.Card}>
-          <Link className={styles.CardLink} to='/treinamentos/checklist'>Checklist<GiChecklist/></Link>
+          <GoChecklist className={styles.Icon} />
+          <Link className={styles.CardLink} to='/treinamentos/checklist'>Checklist</Link>
           </div>
           <div className={styles.Card}>
-          <Link className={styles.CardLink} to='/treinamentos/cronograma'>Cronograma<GiChecklist/></Link>
+          <MdViewTimeline className={styles.Icon} />
+          <Link className={styles.CardLink} to='/treinamentos/cronograma'>Cronograma</Link>
           </div>
           <div className={styles.Card}>
-          <Link className={styles.CardLink} to='/treinamentos/orcamento'>Orçamento<GiChecklist/></Link>
+          <MdOutlineAttachMoney className={styles.Icon} />
+          <Link className={styles.CardLink} to='/treinamentos/orcamento'>Orçamento</Link>
           </div>
         </div>
       </main>
