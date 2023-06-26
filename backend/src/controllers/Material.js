@@ -1,27 +1,42 @@
-const mongoose = require('mongoose')
-const Material = require('../models/Material')
-
-
+const mongoose = require("mongoose");
+const Material = require("../models/Material");
 
 module.exports = {
-  
-    async create(req, res){
-        const {treinamento, kit, data} = req.body
+  async read(req, res) {
+    const MaterialList = await Material.find({ estado: "Pendente" });
 
-        if (!treinamento || !kit || !data){
-            res.status(400).json({msg: 'Complete todos os dados'})
-        }
+    return res.json(MaterialList);
+  },
 
-        const MaterialCreate = await Material.create({
-            treinamento,
-            kit,
-            data
-        })
+  async create(req, res) {
+    const { treinamento, kit, dataSaida } = req.body;
 
-
-        return res.json(MaterialCreate)
+    if (!treinamento || !kit || !data) {
+      res.status(400).json({ msg: "Complete todos os dados" });
     }
 
+    const MaterialCreate = await Material.create({
+      treinamento,
+      kit,
+      dataSaida,
+    });
 
+    return res.json(MaterialCreate);
+  },
 
-}
+  async update(req, res) {
+    const { id } = req.params;
+    const { dataEntrada } = req.body;
+
+    const MaterialUpdate = await Material.findOne({ _id: id });
+
+    if (MaterialUpdate && MaterialUpdate.estado === "Pendente") {
+      MaterialUpdate.estado = "Entregue";
+      MaterialUpdate.dataEntrada = dataEntrada;
+    }
+
+    await MaterialUpdate.save();
+
+    return res.json(MaterialUpdate);
+  },
+};

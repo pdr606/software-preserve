@@ -8,7 +8,7 @@ const Login = require("./controllers/Login");
 const Private = require("./controllers/Private");
 const Annotation = require("./controllers/AnnotationCreate");
 const PdfCreate = require("./controllers/Pdf");
-const Material = require('./controllers/Material')
+const Material = require("./controllers/Material");
 
 routes.post("/register", Register.register);
 routes.post("/login", Login.login);
@@ -21,6 +21,8 @@ routes.post("/annotations/update/:id", checkToken, Annotation.update);
 
 routes.post("/gerarpdf", checkToken, PdfCreate.generatePdf);
 
-routes.post('/material', Material.create)
+routes.get("/material", Material.read);
+routes.post("/material-criar", Material.create);
+routes.put("/material-update/:id", Material.update);
 
 module.exports = routes;
