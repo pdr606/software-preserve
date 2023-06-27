@@ -2,6 +2,8 @@ const express = require("express");
 const routes = express.Router();
 
 const checkToken = require("./helpers/CheckToken");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 const Register = require("./controllers/Register");
 const Login = require("./controllers/Login");
@@ -9,6 +11,7 @@ const Private = require("./controllers/Private");
 const Annotation = require("./controllers/AnnotationCreate");
 const PdfCreate = require("./controllers/Pdf");
 const Material = require("./controllers/Material");
+const Certificado = require("./controllers/Certificado");
 
 routes.post("/register", Register.register);
 routes.post("/login", Login.login);
@@ -24,5 +27,7 @@ routes.post("/gerarpdf", checkToken, PdfCreate.generatePdf);
 routes.get("/material", Material.read);
 routes.post("/material-criar", Material.create);
 routes.put("/material-update/:id", Material.update);
+
+routes.post("/enviar-certificado", Certificado.create);
 
 module.exports = routes;

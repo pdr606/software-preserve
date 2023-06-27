@@ -6,6 +6,7 @@ import { PrivateProvider } from "./routes/private";
 import Checklist from "./componnets/treinamentos/checklist";
 import Cronograma from "./componnets/treinamentos/cronograma";
 import Orcamento from "./componnets/treinamentos/orcamento";
+import Certificado from "./componnets/treinamentos/certificados";
 
 function App() {
   return (
@@ -42,6 +43,14 @@ function App() {
             element={
               <PrivateProvider>
                 <Orcamento />
+              </PrivateProvider>
+            }
+          />
+          <Route
+            path="/treinamentos/certificados"
+            element={
+              <PrivateProvider>
+                <Certificado />
               </PrivateProvider>
             }
           />
