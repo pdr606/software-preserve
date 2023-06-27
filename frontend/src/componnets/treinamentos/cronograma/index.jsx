@@ -64,6 +64,7 @@ function Cronograma() {
     <>
     <Header/>
     <main className={styles.ContainerPai}>
+    <h1 className={styles.Title} >- Gerar e Acompanhar Cronograma -</h1>
       <div className={styles.ContainerFilho}>
         <div className={styles.ContainerLeft}>
           <form onSubmit={handleSubmit}>
@@ -97,6 +98,8 @@ function Cronograma() {
         </div>
       </div>
     </main>
+    <section>
+    </section>
     </>
   );
 }

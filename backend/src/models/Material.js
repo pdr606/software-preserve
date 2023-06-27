@@ -16,6 +16,9 @@ const Material = new mongoose.model("Material", {
   dataEntrada: {
     type: String,
   },
+  observacao: {
+    type: String
+  },
   estado: {
     type: String,
     default: "Pendente",

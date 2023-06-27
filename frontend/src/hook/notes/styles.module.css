@@ -1,8 +1,11 @@
 .Card {
-  background-color: white;
+  background-color: #0d2b81;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
-  height: 300px;
+  height: 320px;
   border-radius: 10px;
+  display: flex column;
+  align-items: center;
+  justify-content: center;
   
 }
 
@@ -10,16 +13,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: lighter;
-  margin-top: 1%;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+font-weight: 400;
+  margin-top: 2%;
+  margin-bottom: 10px;
 }
 
 .Card textarea {
-  width: 96%;
-  margin: 2%;
-  height: 79%;
-  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  width: 90%;
+  border-radius: 10px;
+  padding: 10px;
+  border: none;
+  margin-top: 10px;
+  margin: auto;
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
 }
@@ -29,11 +40,14 @@
 }
 
 .Trash {
-  margin: 2%;
-  color: gray;
+  color: white;
+  margin-left: 5%;
+  margin-top: 1%;
   cursor: pointer;
+  transition: 0.7s;
 }
 
 .Trash:hover {
-  color: rgb(61, 58, 58);
+  color: red;
+  transition: 0.7s;
 }

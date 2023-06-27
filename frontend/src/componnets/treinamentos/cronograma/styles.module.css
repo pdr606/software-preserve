@@ -10,7 +10,7 @@
 }
 
 .ContainerLeft {
-  background-color: white;
+  background-color: #0d2b81;
   height: 400px;
   width: 30%;
   align-items: center;
@@ -22,16 +22,20 @@
 }
 
 .ContainerLeft label {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  color: white;
   font-size: 17px;
 }
 
 .ContainerLeft input {
   padding: 10px;
-  width: 325px;
+  width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 16px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+  border: none;
 }
 
 .ContainerRight {
@@ -50,9 +54,11 @@
   margin-top: 10px;
   padding: 10px;
   height: 170px;
-  width: 325px;
-  font-size: 16px;
+  width: 350px;
+  font-size: 14px;
   font-family: 'Roboto', sans-serif;
+  border-radius: 10px;
+  border: none;
 }
 
 .ContainerLeft textarea:focus {
@@ -63,12 +69,25 @@
   margin-top: 10px;
   padding: 5px;
   width: 90px;
-  font-weight: 300;
-  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  font-family: "Roboto", sans-serif;
   cursor: pointer;
-  background-color: #3F6DB0;
-  color: white;
+  background-color: white;
+  color: black;
   border: none;
   border-radius: 20px;
+  transition: 0.7s;
 
+}
+
+.ContainerLeft button:hover{
+  background-color: green;
+  transition: 0.7s;
+  color: white;
+}
+
+.Title{
+  text-align: center;
+  margin-top: 20px;
 }

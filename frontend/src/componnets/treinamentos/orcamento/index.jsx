@@ -111,6 +111,7 @@ function Orcamento() {
     <div className={styles.Container} >
       <>
       <Header/>
+        <h1 className={styles.Title}>- Gerar Orçamento -</h1>
         <form className={styles.Formulario} onSubmit={handleSubmit}>
           <div className={styles.ContainerForm} >
           <input
