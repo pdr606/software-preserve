@@ -3,7 +3,7 @@ const routes = express.Router();
 
 const checkToken = require("./helpers/CheckToken");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ dest: "./uploads" });
 
 const Register = require("./controllers/Register");
 const Login = require("./controllers/Login");
@@ -28,6 +28,6 @@ routes.get("/material", Material.read);
 routes.post("/material-criar", Material.create);
 routes.put("/material-update/:id", Material.update);
 
-routes.post("/enviar-certificado", Certificado.create);
+routes.post("/enviar-certificado", upload.single('excel'), Certificado.create);
 
 module.exports = routes;

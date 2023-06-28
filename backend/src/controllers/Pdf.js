@@ -9,16 +9,9 @@ module.exports = {
 
     const htmlPath = path.join(__dirname, "print.ejs");
     const html = fs.readFileSync(htmlPath, "utf-8");
-    const htmlWithData = html
-      .replace("{{NOME}}", formValues.nome)
-      .replace("{{EMAIL}}", formValues.email)
-      .replace("{{MENSAGEM}}", formValues.mensagem)
-      .replace("{{ALUNOS}}", formValues.alunos)
-      .replace("{{HORAS}}", formValues.horas)
-      .replace("{{CURSO}}", curso)
-      .replace("{{TOTAL}}", total);
 
-    const renderedHtml = ejs.render(htmlWithData, { formValues, curso, total });
+
+    const renderedHtml = ejs.render(html, { formValues, curso, total });
 
     const browser = await puppeteer.launch({
       headless: "new",

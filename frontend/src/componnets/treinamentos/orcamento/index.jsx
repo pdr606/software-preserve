@@ -73,7 +73,6 @@ function Orcamento() {
         }),
       });
 
-
       const contentType = response.headers.get("content-type");
 
       if (contentType && contentType.startsWith("application/pdf")) {
