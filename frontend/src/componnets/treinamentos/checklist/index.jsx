@@ -6,50 +6,46 @@ import api from "../../../services/api";
 
 import styles from "./styles.module.css";
 import Select from "../../../hook/select";
-import Loading from '../../../img/Loading2.gif'
+import Loading from "../../../img/Loading2.gif";
 
 function Checklist() {
-  const [checklist, setCheckList] = useState([])
-  const [notes, setAllNotes] = useState([])
+  const [checklist, setCheckList] = useState([]);
+  const [notes, setAllNotes] = useState([]);
   const [title, setTitle] = useState([]);
   const [treinamento, setTreinamento] = useState("");
   const [kit, setKit] = useState("");
   const [dataSaida, setDataSaida] = useState("");
+  const [dataEntrega, setDataEntrega] = useState("");
   const [observacao, setObservacao] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
 
-  const  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      setLoading(true)
-       const response = await api.post('/material-criar', {
+      setLoading(true);
+      const response = await api.post("/material-criar", {
         treinamento,
         kit,
         dataSaida,
-        observacao
-      })
-      setCheckList([...checklist, response.data])
-      
+        observacao,
+      });
+      setCheckList([...checklist, response.data]);
     } catch (error) {
-      console.log(error)
-      
+      console.log(error);
     } finally {
-      setLoading(false)
-      setTreinamento('')
-      setKit('')
-      setDataSaida('')
-      setObservacao('')
-
+      setLoading(false);
+      setTreinamento("");
+      setKit("");
+      setDataSaida("");
+      setObservacao("");
     }
-
-
   };
 
-  const handleUpdate = async (e) =>{
-    e.preventDefault()
-  }
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+  };
 
   useEffect(() => {
     const getAllNotes = async () => {
@@ -108,7 +104,7 @@ function Checklist() {
               <label htmlFor="dataSaida">Data de Saída</label>
               <br />
               <input
-              required
+                required
                 type="date"
                 value={dataSaida}
                 onChange={({ target }) => setDataSaida(target.value)}
@@ -116,99 +112,257 @@ function Checklist() {
               <label htmlFor="observacao">Observações</label>
               <br />
               <textarea
-              required
+                required
                 value={observacao}
                 onChange={({ target }) => setObservacao(target.value)}
               ></textarea>
               <br />
-              {loading ? <img className={styles.Loading} src={Loading} alt="Gif Loading" /> : <button type="submit">Salvar</button>}
+              {loading ? (
+                <img
+                  className={styles.Loading}
+                  src={Loading}
+                  alt="Gif Loading"
+                />
+              ) : (
+                <button type="submit">Salvar</button>
+              )}
             </form>
           </div>
-          <div className={styles.ContainerRight} >
-            <div className={styles.Card} >
-              <h1><AiFillPushpin/> Kit Básico</h1>
+          <div className={styles.ContainerRight}>
+            <div className={styles.Card}>
+              <h1>
+                <AiFillPushpin /> Kit Básico
+              </h1>
               <ul>
-                <li><AiOutlineCheck className={styles.Icon} />Mochila</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Notebook</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Carregador do Notebook</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Canetas</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Mochila</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Data show</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Passador de Slide</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Pen drive</li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} />
+                  Mochila
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Notebook
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Carregador do
+                  Notebook
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Canetas
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Mochila
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Data show
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Passador de Slide
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Pen drive
+                </li>
               </ul>
             </div>
-            <div className={styles.Card} >
-              <h1><AiFillPushpin/>Kit APH</h1>
+            <div className={styles.Card}>
+              <h1>
+                <AiFillPushpin />
+                Kit APH
+              </h1>
               <ul>
-                <li><AiOutlineCheck className={styles.Icon}/> Prancha Amarela</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Maleta de primeiros socorros</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Boneco simulação</li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Prancha Amarela
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Maleta de primeiros
+                  socorros
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Boneco simulação
+                </li>
               </ul>
             </div>
-            <div className={styles.Card} >
-              <h1><AiFillPushpin/>Kit NR-20</h1>
+            <div className={styles.Card}>
+              <h1>
+                <AiFillPushpin />
+                Kit NR-20
+              </h1>
               <ul>
-                <li><AiOutlineCheck className={styles.Icon}/> Kit Básico</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Extintores</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Queimador / Especifícar o modelo</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Maleta / Isqueiro / Manômetro</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Ascendedor a gás</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Luva / Especifícar quantidade </li>
-                <li><AiOutlineCheck className={styles.Icon}/> Óculos / Especifícar quantidade </li>
-                <li><AiOutlineCheck className={styles.Icon}/> Capacete / Especifícar quantidade </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Kit Básico
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Extintores
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Queimador /
+                  Especifícar o modelo
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Maleta / Isqueiro /
+                  Manômetro
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Ascendedor a gás
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Luva / Especifícar
+                  quantidade{" "}
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Óculos /
+                  Especifícar quantidade{" "}
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Capacete /
+                  Especifícar quantidade{" "}
+                </li>
               </ul>
             </div>
-            <div className={styles.Card} >
-              <h1><AiFillPushpin/>Kit NR-33</h1>
+            <div className={styles.Card}>
+              <h1>
+                <AiFillPushpin />
+                Kit NR-33
+              </h1>
               <ul>
-                <li><AiOutlineCheck className={styles.Icon}/> Kit Básico</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Kit APH</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Cinto de segurança</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Talabarte</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Equipamento de respiração autônomo</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Maleta Azul / Ferramentaria</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Cordas / Especifícar tamanhos</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Prancha formato concha - Laranja</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Tripé Reclinável</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Detector de Gás</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Luva / Especifícar quantidade </li>
-                <li><AiOutlineCheck className={styles.Icon}/> Óculos / Especifícar quantidade </li>
-                <li><AiOutlineCheck className={styles.Icon}/> Capacete / Especifícar quantidade </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Kit Básico
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Kit APH
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Cinto de segurança
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Talabarte
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Equipamento de
+                  respiração autônomo
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Maleta Azul /
+                  Ferramentaria
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Cordas /
+                  Especifícar tamanhos
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Prancha formato
+                  concha - Laranja
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Tripé Reclinável
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Detector de Gás
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Luva / Especifícar
+                  quantidade{" "}
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Óculos /
+                  Especifícar quantidade{" "}
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Capacete /
+                  Especifícar quantidade{" "}
+                </li>
               </ul>
             </div>
-            <div className={styles.Card} >
-              <h1><AiFillPushpin/>Kit Brigada</h1>
+            <div className={styles.Card}>
+              <h1>
+                <AiFillPushpin />
+                Kit Brigada
+              </h1>
               <ul>
-                <li><AiOutlineCheck className={styles.Icon}/> Kit Básico</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Kit APH</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Extintores</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Queimador / Especifícar o modelo</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Maleta / Isqueiro / Manômetro</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Ascendedor a gás</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Duas Mangueiras 1,5m</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Uma Mangueira 2,5m</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Adaptador 2,5 para 1,5</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Disjuntor</li>
-                <li><AiOutlineCheck className={styles.Icon}/> Luva / Especifícar quantidade </li>
-                <li><AiOutlineCheck className={styles.Icon}/> Óculos / Especifícar quantidade </li>
-                <li><AiOutlineCheck className={styles.Icon}/> Capacete / Especifícar quantidade </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Kit Básico
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Kit APH
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Extintores
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Queimador /
+                  Especifícar o modelo
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Maleta / Isqueiro /
+                  Manômetro
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Ascendedor a gás
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Duas Mangueiras
+                  1,5m
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Uma Mangueira 2,5m
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Adaptador 2,5 para
+                  1,5
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Disjuntor
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Luva / Especifícar
+                  quantidade{" "}
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Óculos /
+                  Especifícar quantidade{" "}
+                </li>
+                <li>
+                  <AiOutlineCheck className={styles.Icon} /> Capacete /
+                  Especifícar quantidade{" "}
+                </li>
               </ul>
             </div>
           </div>
         </div>
-        <section className={styles.ShowCard} >
-          {checklist.length > 0 && checklist.map((item) =>(
-            <div className={styles.CardTemporario} key={item._id}>
-              <h3>Treinamento: <span>{item.treinamento}</span></h3>
-              <p>Kit Usado: <span>{item.kit}</span></p>
-              <p>Data de Saída: <span>{item.dataSaida}</span></p>
-              <p>Observações: <span>{item.observacao}</span></p>
-              <p>Estado: <span className={styles.Span}>{item.estado} <BiErrorAlt className={styles.IconSpan} /> </span></p>
-              <p>Data de Entrada: <span><input type="date" required /><button onClick={handleUpdate} >Entregue</button></span></p>
-
-            </div>
-          ))}
+        <section className={styles.ShowCard}>
+          {checklist.length > 0 &&
+            checklist.map((item) => (
+              <div className={styles.CardTemporario} key={item._id}>
+                <h3>
+                  Treinamento: <span>{item.treinamento}</span>
+                </h3>
+                <p>
+                  Kit Usado: <span>{item.kit}</span>
+                </p>
+                <p>
+                  Data de Saída: <span>{item.dataSaida}</span>
+                </p>
+                <p>
+                  Observações: <span>{item.observacao}</span>
+                </p>
+                <p>
+                  Estado:{" "}
+                  <span className={styles.Span}>
+                    {item.estado} <BiErrorAlt className={styles.IconSpan} />{" "}
+                  </span>
+                </p>
+                <p>
+                  Data de Entrada:{" "}
+                  <span>
+                    <input
+                      type="date"
+                      required
+                      value={dataEntrega}
+                      onChange={({ target }) => setDataEntrega(target.value)}
+                    />
+                    <button onClick={handleUpdate}>Entregue</button>
+                  </span>
+                </p>
+              </div>
+            ))}
         </section>
       </main>
     </>

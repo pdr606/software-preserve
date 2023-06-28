@@ -10,7 +10,6 @@ module.exports = {
     const htmlPath = path.join(__dirname, "print.ejs");
     const html = fs.readFileSync(htmlPath, "utf-8");
 
-
     const renderedHtml = ejs.render(html, { formValues, curso, total });
 
     const browser = await puppeteer.launch({
