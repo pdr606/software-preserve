@@ -1,8 +1,15 @@
 import Header from "../../../hook/header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import styles from './styles.module.css'
+import Select from "../../../hook/select";
+import api from "../../../services/api";
 
 function Certificado() {
   const [selectFile, setSelectFile] = useState(null);
+  const [curso, setCurso] = useState('')
+  const [instrutor, setInstrutor] = useState('')
+  const [instrutores, setInstrutores] = useState([])
 
   const handleFileUpload = (event) => {
     setSelectFile(event.target.files[0]);
@@ -39,13 +46,46 @@ function Certificado() {
     }
   };
 
+  useEffect(() =>{
+    const searchInstrutor = async () =>{
+      const response = await api.get('/buscar-instrutor')
+      const data = response.data
+
+      const instrutores = data.map((instrutor) => instrutor.nome)
+      setInstrutores(instrutores)
+    }
+
+
+    searchInstrutor()
+  }, [])
+
+
   return (
     <>
       <Header />
-      <div>
-        <input type="file" accept=".xlsx" onChange={handleFileUpload} />
-        <button onClick={handleUpload}>Enviar</button>
-      </div>
+      <main className={styles.Container} >
+        <div className={styles.ContainerLeft} >
+          <div className={styles.Card} >
+          <h1>Gerar Certificados / PDF</h1>
+          <Select
+          className={styles.Select}
+          text="Curso"
+          options={['NR-06', 'NR-12', 'NR-33']}
+          setValue={setCurso}
+          value={curso}
+          />
+          <Select
+          className={styles.Select}
+          text="Instrutor"
+          options={instrutores}
+          setValue={setInstrutor}
+          value={instrutor}
+          />
+          <input  type="file" accept=".xlsx" onChange={handleFileUpload} />
+          <button onClick={handleUpload}>Enviar</button>
+          </div>
+        </div>
+      </main>
     </>
   );
 }

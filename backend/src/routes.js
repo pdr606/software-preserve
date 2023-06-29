@@ -12,6 +12,7 @@ const Annotation = require("./controllers/AnnotationCreate");
 const PdfCreate = require("./controllers/Pdf");
 const Material = require("./controllers/Material");
 const Certificado = require("./controllers/Certificado");
+const CriarInstrutor = require('./controllers/RegisterInstrutor')
 
 routes.post("/register", Register.register);
 routes.post("/login", Login.login);
@@ -29,5 +30,8 @@ routes.post("/material-criar", Material.create);
 routes.put("/material-update/:id", Material.update);
 
 routes.post("/enviar-certificado", upload.single('excel'), Certificado.create);
+
+routes.post('/criar-instrutor', CriarInstrutor.create)
+routes.get('/buscar-instrutor', CriarInstrutor.read)
 
 module.exports = routes;

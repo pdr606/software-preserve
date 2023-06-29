@@ -66,7 +66,7 @@
       .InstrutorAluno {
         margin: auto;
         width: 80%;
-        padding-top: 170px;
+        padding-top: 125px;
         height: 120px;
         display: flex;
         justify-content: space-between;
@@ -107,11 +107,12 @@
         <div class="Div1">
           <p class="Margin">
             Certificamos que <span><%= element.NOME.toUpperCase() %></span> <%=
-            jsonData[0].TEXTO %>
+            element.TEXTO %>
           </p>
         </div>
         <p class="Margin">Empresa: <%= element.EMPRESA %></p>
         <p class="Margin"><%= element.LOCALIZACAO %></p>
+        <p class="Margin"><%= element.ID %></p>
         <div class="InstrutorAluno">
           <div>
             <strong

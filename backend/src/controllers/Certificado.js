@@ -22,33 +22,25 @@ module.exports = {
     const workshet = workbook.Sheets[sheetName];
     const jsonData = xlsx.utils.sheet_to_json(workshet);
 
-    try {
-      jsonData.forEach(async (e) => {
+      for (const e of jsonData) {
         const newSave = await CertificadoSave.create({
           NOME: e.NOME,
           LOCALIZACAO: e.LOCALIZACAO,
           TREINAMENTO,
         });
-
-        console.log(newSave);
-
+    
         let jsonDataUpdate = {
+          ID: newSave._id,
           NOME: e.NOME,
           CPF: e.CPF,
           LOCALIZACAO: e.LOCALIZACAO,
           EMPRESA: e.EMPRESA,
           TEXTO: e.TEXTO,
         };
-
+    
         Data.push(jsonDataUpdate);
-      });
-    } catch (error) {
-      console.log("Deu ruim");
-    } finally {
-      console.log("MEU DATA ESTA AQUI EM BAIXO");
-      console.log(Data);
-    }
-
+      }
+    
     const htmlPath = path.join(__dirname, "Certificado.ejs");
     const html = fs.readFileSync(htmlPath, "utf-8");
 
@@ -75,6 +67,13 @@ module.exports = {
         'attachment; filename="certificado.pdf"'
       );
       res.send(pdfBuffer);
+      fs.unlink(filePath, (err) =>{
+        if(err){
+          console.log(err)
+        } else{
+          return
+        }
+      })
     } catch (error) {
       console.log(error);
     }
