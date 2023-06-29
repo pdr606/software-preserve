@@ -9,6 +9,8 @@ const CertificadoSave = require("../models/CertificadoSave");
 module.exports = {
   async create(req, res) {
     const file = req.file;
+    const { instrutor } = req.body;
+    console.log(instrutor);
     let Data = [];
     const TREINAMENTO = "NR-35";
 
@@ -22,25 +24,25 @@ module.exports = {
     const workshet = workbook.Sheets[sheetName];
     const jsonData = xlsx.utils.sheet_to_json(workshet);
 
-      for (const e of jsonData) {
-        const newSave = await CertificadoSave.create({
-          NOME: e.NOME,
-          LOCALIZACAO: e.LOCALIZACAO,
-          TREINAMENTO,
-        });
-    
-        let jsonDataUpdate = {
-          ID: newSave._id,
-          NOME: e.NOME,
-          CPF: e.CPF,
-          LOCALIZACAO: e.LOCALIZACAO,
-          EMPRESA: e.EMPRESA,
-          TEXTO: e.TEXTO,
-        };
-    
-        Data.push(jsonDataUpdate);
-      }
-    
+    for (const e of jsonData) {
+      const newSave = await CertificadoSave.create({
+        NOME: e.NOME,
+        LOCALIZACAO: e.LOCALIZACAO,
+        TREINAMENTO,
+      });
+
+      let jsonDataUpdate = {
+        ID: newSave._id,
+        NOME: e.NOME,
+        CPF: e.CPF,
+        LOCALIZACAO: e.LOCALIZACAO,
+        EMPRESA: e.EMPRESA,
+        TEXTO: e.TEXTO,
+      };
+
+      Data.push(jsonDataUpdate);
+    }
+
     const htmlPath = path.join(__dirname, "Certificado.ejs");
     const html = fs.readFileSync(htmlPath, "utf-8");
 
@@ -67,13 +69,13 @@ module.exports = {
         'attachment; filename="certificado.pdf"'
       );
       res.send(pdfBuffer);
-      fs.unlink(filePath, (err) =>{
-        if(err){
-          console.log(err)
-        } else{
-          return
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          return;
         }
-      })
+      });
     } catch (error) {
       console.log(error);
     }
