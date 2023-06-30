@@ -15,13 +15,13 @@
         min-height: 100%;
       }
 
-      .ContainerVerso{
+      .ContainerVerso {
         background-color: #eee;
         width: 100%;
         height: 100vh;
       }
 
-      .FundoVerso{
+      .FundoVerso {
         background-image: url(https://dmanisio.sirv.com/Images/frente-logo-preserve.png);
         margin-top: 1000px;
         height: 100%;
@@ -32,7 +32,7 @@
         background-position-x: center;
       }
 
-      .FundoVerso h1{
+      .FundoVerso h1 {
         font-size: 30px;
         padding-top: 40px;
         font-family: Arial, Helvetica, sans-serif;
@@ -41,14 +41,14 @@
 
       .ConteudoProgramatico {
         column-count: 2;
-        column-gap: 20px; 
+        column-gap: 20px;
         margin-top: 40px;
         padding-left: 50px;
         height: 70%;
-        }
+      }
 
       .FundoVerso li {
-        font-family: 'Calibri';
+        font-family: "Calibri";
         font-size: 18px;
         padding: 10px 0px;
         font-weight: 300;
@@ -94,7 +94,7 @@
       }
 
       .ContainerCertificado div p {
-        text-align: left;
+        text-align: justify;
         font-size: 28px;
       }
 
@@ -106,7 +106,7 @@
         margin-top: 20px;
       }
 
-      .ResponsavelTecnico{
+      .ResponsavelTecnico {
         margin-left: 65px;
         width: 80%;
         margin-top: -20px;
@@ -114,14 +114,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-
       }
 
-      .ResponsavelTecnico img{
+      .ResponsavelTecnico img {
         margin-left: 75px;
       }
 
-      .ResponsavelTecnico strong{
+      .ResponsavelTecnico strong {
         font-family: "Calibri";
         font-weight: bold;
         font-size: 18px;
@@ -132,7 +131,7 @@
         width: 250px;
       }
 
-      .ResponsavelTecnico h4{
+      .ResponsavelTecnico h4 {
         font-family: "Calibri";
         font-size: 18px;
         font-weight: lighter;
@@ -150,6 +149,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
       }
 
       .InstrutorAluno strong {
@@ -161,6 +161,15 @@
         border-top: 1px solid black;
         padding-top: 3px;
         width: 250px;
+      }
+
+      .InstrutorAluno img {
+        position: absolute;
+        z-index: 1;
+        height: 100%; /* Definir a altura como 100% */
+        object-fit: contain; /* Manter a proporção da imagem */
+        right: -20px; /* Alinhar a imagem à esquerda */
+        top: 10px;
       }
 
       .InstrutorAluno h4 {
@@ -201,6 +210,10 @@
             <h4>Aluno / Participante</h4>
           </div>
           <div>
+            <img
+              src="<%= element.URL_FOTO_INSTRUTOR %>"
+              alt="Assinatura instrutor"
+            />
             <strong><%= element.NOME_INSTRUTOR %></strong>
             <h4><%= element.FORMACAO_INSTRUTOR %></h4>
             <h4><%= element.DADOS_INSTRUTOR %></h4>
@@ -210,18 +223,20 @@
       <% }); %>
     </div>
 
-
     <div class="ContainerVerso">
       <div class="FundoVerso">
-        <h1 >Conteúdo Programático</h1>
-        <div class="ConteudoProgramatico" >
+        <h1>Conteúdo Programático</h1>
+        <div class="ConteudoProgramatico">
           <% conteudo_programatico.forEach(function(item) { %>
-            <li><%= item %>;</li>
+          <li><%= item %>;</li>
           <% }); %>
         </div>
-        <div class="ResponsavelTecnico" >
+        <div class="ResponsavelTecnico">
           <div>
-            <img src="https://dmanisio.sirv.com/Images/assinatura-alexandre.png" alt="Assinatura ">
+            <img
+              src="https://dmanisio.sirv.com/Images/assinatura-alexandre.png"
+              alt="Assinatura "
+            />
             <strong>Alexandre Andrade Coutinho</strong>
             <h4>Resp. Técnico Pela Capacitação</h4>
             <h4>CREA - 043632/D-ES</h4>
@@ -229,6 +244,5 @@
         </div>
       </div>
     </div>
-    
   </body>
 </html>

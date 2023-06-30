@@ -12,8 +12,9 @@ const Annotation = require("./controllers/AnnotationCreate");
 const PdfCreate = require("./controllers/Pdf");
 const Material = require("./controllers/Material");
 const Certificado = require("./controllers/Certificado");
-const CriarInstrutor = require('./controllers/RegisterInstrutor')
-const CriarConteudoProgramatico = require('./controllers/CriarConteudoProgramatico')
+const CriarInstrutor = require("./controllers/RegisterInstrutor");
+const CriarConteudoProgramatico = require("./controllers/CriarConteudoProgramatico");
+const ValidarCertificado = require("./controllers/ValidarCertificado");
 
 routes.post("/register", Register.register);
 routes.post("/login", Login.login);
@@ -30,12 +31,14 @@ routes.get("/material", Material.read);
 routes.post("/material-criar", Material.create);
 routes.put("/material-update/:id", Material.update);
 
-routes.post("/enviar-certificado", upload.single('excel'), Certificado.create);
+routes.post("/enviar-certificado", upload.single("excel"), Certificado.create);
 
-routes.post('/criar-instrutor', CriarInstrutor.create)
-routes.get('/buscar-instrutor', CriarInstrutor.read)
+routes.post("/criar-instrutor", CriarInstrutor.create);
+routes.get("/buscar-instrutor", CriarInstrutor.read);
 
-routes.post('/criar-conteudo-programatico', CriarConteudoProgramatico.create)
-routes.get('/buscar-conteudo-programatico', CriarConteudoProgramatico.read)
+routes.post("/criar-conteudo-programatico", CriarConteudoProgramatico.create);
+routes.get("/buscar-conteudo-programatico", CriarConteudoProgramatico.read);
+
+routes.post("/validar-certificado", ValidarCertificado.search);
 
 module.exports = routes;
