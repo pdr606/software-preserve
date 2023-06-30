@@ -13,6 +13,7 @@ const PdfCreate = require("./controllers/Pdf");
 const Material = require("./controllers/Material");
 const Certificado = require("./controllers/Certificado");
 const CriarInstrutor = require('./controllers/RegisterInstrutor')
+const CriarConteudoProgramatico = require('./controllers/CriarConteudoProgramatico')
 
 routes.post("/register", Register.register);
 routes.post("/login", Login.login);
@@ -33,5 +34,8 @@ routes.post("/enviar-certificado", upload.single('excel'), Certificado.create);
 
 routes.post('/criar-instrutor', CriarInstrutor.create)
 routes.get('/buscar-instrutor', CriarInstrutor.read)
+
+routes.post('/criar-conteudo-programatico', CriarConteudoProgramatico.create)
+routes.get('/buscar-conteudo-programatico', CriarConteudoProgramatico.read)
 
 module.exports = routes;

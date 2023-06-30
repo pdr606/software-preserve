@@ -5,14 +5,18 @@ const puppeteer = require("puppeteer");
 const ejs = require("ejs");
 
 const CertificadoSave = require("../models/CertificadoSave");
+const ConteudoProgramatico = require('../models/ConteudoProgramatico')
 
 module.exports = {
   async create(req, res) {
+    let Data = [];
     const file = req.file;
     const { instrutor } = req.body;
-    console.log(instrutor);
-    let Data = [];
-    const TREINAMENTO = "NR-35";
+    const {curso} = req.body
+    const instrutorDados = JSON.parse(instrutor)
+
+    const buscarConteudoProgramaticoPeloCurso = await ConteudoProgramatico.find({curso:curso})
+    const conteudo_programatico = buscarConteudoProgramaticoPeloCurso[0].conteudo_programatico
 
     if (!file) {
       return res.status(400).send("Nenhum arquivo foi enviado");
@@ -28,7 +32,7 @@ module.exports = {
       const newSave = await CertificadoSave.create({
         NOME: e.NOME,
         LOCALIZACAO: e.LOCALIZACAO,
-        TREINAMENTO,
+        TREINAMENTO: curso,
       });
 
       let jsonDataUpdate = {
@@ -38,6 +42,10 @@ module.exports = {
         LOCALIZACAO: e.LOCALIZACAO,
         EMPRESA: e.EMPRESA,
         TEXTO: e.TEXTO,
+        NOME_INSTRUTOR: instrutorDados[0].nome,
+        FORMACAO_INSTRUTOR: instrutorDados[0].formacao,
+        DADOS_INSTRUTOR: instrutorDados[0].dados,
+        CONTEUDO_PROGRAMATICO: buscarConteudoProgramaticoPeloCurso[0].conteudo_programatico,
       };
 
       Data.push(jsonDataUpdate);
@@ -46,7 +54,7 @@ module.exports = {
     const htmlPath = path.join(__dirname, "Certificado.ejs");
     const html = fs.readFileSync(htmlPath, "utf-8");
 
-    const renderHtml = ejs.render(html, { Data });
+    const renderHtml = ejs.render(html, { Data, conteudo_programatico });
 
     const browser = await puppeteer.launch({
       headless: "next",
@@ -61,6 +69,7 @@ module.exports = {
       printBackground: true,
       landscape: true,
     });
+
 
     try {
       res.setHeader("Content-Type", "application/pdf");

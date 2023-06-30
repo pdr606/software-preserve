@@ -8,8 +8,9 @@ import api from "../../../services/api";
 function Certificado() {
   const [selectFile, setSelectFile] = useState(null);
   const [curso, setCurso] = useState("");
-  const [instrutor, setInstrutor] = useState("");
-  const [instrutores, setInstrutores] = useState([]);
+  const [arrayInstrutores, setArrayInstrutores] = useState([])
+  const [instrutorEscolhido, setInstrutorEscolhido] = useState("");
+  const [arrayNomeInstrutores, setArrayNomeInstrutores] = useState([]);
 
   const [nomeInstrutor, setNomeInstrutor] = useState("");
   const [formacaoInstrutor, setFormacaoInstrutor] = useState("");
@@ -21,16 +22,20 @@ function Certificado() {
   };
 
   const handleUpload = async () => {
+
+    const instrutorEscolhidoComDados = arrayInstrutores.filter((instrutor) => instrutor.nome === instrutorEscolhido)
+
     const formData = new FormData();
     formData.append("excel", selectFile);
-    formData.append("instrutor", instrutor);
-
-    console.log(instrutor);
+    formData.append("instrutor", JSON.stringify(instrutorEscolhidoComDados));
+    formData.append('curso', curso )
     try {
       const response = await fetch("http://localhost:3033/enviar-certificado", {
         method: "POST",
         body: formData,
       });
+
+      console.log(instrutorEscolhidoComDados)
 
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.startsWith("application/pdf")) {
@@ -72,8 +77,9 @@ function Certificado() {
     const response = await api.get("/buscar-instrutor");
     const data = response.data;
 
+    setArrayInstrutores(response.data)
     const instrutores = data.map((instrutor) => instrutor.nome);
-    setInstrutores(instrutores);
+    setArrayNomeInstrutores(instrutores);
     setNomeInstrutor("");
     setFormacaoInstrutor("");
     setDadosInstrutor("");
@@ -94,16 +100,16 @@ function Certificado() {
             <Select
               className={styles.Select}
               text="Curso"
-              options={["NR-06", "NR-12", "NR-33"]}
+              options={["NR-06", "NR-10", "NR-35"]}
               setValue={setCurso}
               value={curso}
             />
             <Select
               className={styles.Select}
               text="Instrutor"
-              options={instrutores}
-              setValue={setInstrutor}
-              value={instrutor}
+              options={arrayNomeInstrutores}
+              setValue={setInstrutorEscolhido}
+              value={instrutorEscolhido}
             />
             <input type="file" accept=".xlsx" onChange={handleFileUpload} />
             <button
