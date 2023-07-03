@@ -43,9 +43,28 @@ function Checklist() {
     }
   };
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
+  const handleUpdate = async (id) => {
+    console.log("Rodei");
+    try {
+      const response = await api.put(`material-update/${id}`, {
+        dataEntrega,
+      });
+      buscarMaterial();
+      console.log(response);
+    } catch (err) {
+      console.log("Error");
+    }
   };
+
+  const buscarMaterial = async () => {
+    const response = await api.get("/material");
+    setCheckList(response.data);
+    console.log(response);
+  };
+
+  useEffect(() => {
+    buscarMaterial();
+  }, []);
 
   useEffect(() => {
     const getAllNotes = async () => {
@@ -358,7 +377,9 @@ function Checklist() {
                       value={dataEntrega}
                       onChange={({ target }) => setDataEntrega(target.value)}
                     />
-                    <button onClick={handleUpdate}>Entregue</button>
+                    <button onClick={() => handleUpdate(item._id)}>
+                      Entregue
+                    </button>
                   </span>
                 </p>
               </div>

@@ -1,85 +1,84 @@
-.Container{
-    background-color: white;
-    width: 100%;
-    height: 100vh;
+.Container {
+  background-color: white;
+  width: 100%;
+  height: 100vh;
 }
 
-.Titulo{
-    font-family: 'Roboto',sans-serif;
-    background-color:#0d2b81;
-    text-align: center;
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.Titulo {
+  font-family: "Roboto", sans-serif;
+  background-color: #0d2b81;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.Titulo h1{
-    margin-left: 10px;
-    font-weight: 300;
+.Titulo h1 {
+  margin-left: 10px;
+  font-weight: 300;
 }
 
-.Menu{
-    text-align: center;
-    margin: auto;
-    padding-top: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.Menu {
+  text-align: center;
+  margin: auto;
+  padding-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.Menu h2{
-    padding-right: 10px;
-    font-size: 50px;
-    font-weight: 300;
+.Menu h2 {
+  padding-right: 10px;
+  font-size: 50px;
+  font-weight: 300;
 }
 
-
-.Icon{
-    font-size: 25px;
+.Icon {
+  font-size: 25px;
 }
 
-.ContainerCard{
-    height: 800px;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5px;
-    display: flex;
+.ContainerCard {
+  height: 800px;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
 }
 
-.Card{
-    background-color:#0d2b81;
-    width: 200px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: 5%;
-    margin-top: 3%;
-    border-radius: 20px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
-    
+.Card {
+  background-color: #0d2b81;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5%;
+  margin-top: 3%;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-.Icon{
-    font-size: 70px;
-    color: white;
+.Icon {
+  font-size: 70px;
+  color: white;
 }
 
-.Card:hover{
-    transition: 0.6s;
-    background-color:#0d2c81da;
+.Card:hover {
+  transition: 0.6s;
+  background-color: #0d2c81da;
 }
 
-.CardLink{
-    text-decoration: none;
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    font-size: 23px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
+.CardLink {
+  text-decoration: none;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }

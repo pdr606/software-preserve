@@ -210,10 +210,12 @@
             <h4>Aluno / Participante</h4>
           </div>
           <div>
+            <% if (element.URL_FOTO_INSTRUTOR) { %>
             <img
               src="<%= element.URL_FOTO_INSTRUTOR %>"
               alt="Assinatura instrutor"
             />
+            <% } %>
             <strong><%= element.NOME_INSTRUTOR %></strong>
             <h4><%= element.FORMACAO_INSTRUTOR %></h4>
             <h4><%= element.DADOS_INSTRUTOR %></h4>
