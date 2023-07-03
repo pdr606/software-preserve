@@ -6,6 +6,7 @@ import Select from "../../../hook/select";
 import api from "../../../services/api";
 
 function Certificado() {
+  const token = localStorage.getItem("token");
   const [selectFile, setSelectFile] = useState(null);
   const [curso, setCurso] = useState("");
   const [arrayInstrutores, setArrayInstrutores] = useState([]);
@@ -41,9 +42,10 @@ function Certificado() {
       const response = await fetch("http://localhost:3033/enviar-certificado", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
-
-      console.log(instrutorEscolhidoComDados);
 
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.startsWith("application/pdf")) {
@@ -67,22 +69,26 @@ function Certificado() {
   const registrarInstrutor = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await api.post("/criar-instrutor", {
+    await api.post(
+      "/criar-instrutor",
+      {
         nome: nomeInstrutor,
         formacao: formacaoInstrutor,
         dados: dadosInstrutor,
         url_foto: assinaturaInstrutor,
-      });
-      searchInstrutor();
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
+      },
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
+    );
+    searchInstrutor();
   };
 
   const searchInstrutor = async () => {
-    const response = await api.get("/buscar-instrutor");
+    const response = await api.get("/buscar-instrutor", {
+      headers: { authorization: `Bearer ${token}` },
+    });
+
     const data = response.data;
 
     setArrayInstrutores(response.data);
@@ -98,12 +104,15 @@ function Certificado() {
     e.preventDefault();
     setCertificadoValido(false);
 
-    console.log("Entrou aqui");
-
     try {
-      const response = await api.post("/validar-certificado", {
-        idParaValidar,
-      });
+      const response = await api.post(
+        "/validar-certificado",
+        {
+          idParaValidar,
+        },
+
+        { headers: { authorization: `Bearer ${token}` } }
+      );
       setCertificadoValido(response.data);
     } catch (error) {
       setCertificadoInvalido(true);

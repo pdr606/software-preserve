@@ -27,18 +27,31 @@ routes.post("/annotations/update/:id", checkToken, Annotation.update);
 
 routes.post("/gerarpdf", checkToken, PdfCreate.generatePdf);
 
-routes.get("/material", Material.read);
-routes.post("/material-criar", Material.create);
-routes.put("/material-update/:id", Material.update);
+routes.get("/material", checkToken, Material.read);
+routes.post("/material-criar", checkToken, Material.create);
+routes.put("/material-update/:id", checkToken, Material.update);
 
-routes.post("/enviar-certificado", upload.single("excel"), Certificado.create);
+routes.post(
+  "/enviar-certificado",
+  checkToken,
+  upload.single("excel"),
+  Certificado.create
+);
 
-routes.post("/criar-instrutor", CriarInstrutor.create);
-routes.get("/buscar-instrutor", CriarInstrutor.read);
+routes.post("/criar-instrutor", checkToken, CriarInstrutor.create);
+routes.get("/buscar-instrutor", checkToken, CriarInstrutor.read);
 
-routes.post("/criar-conteudo-programatico", CriarConteudoProgramatico.create);
-routes.get("/buscar-conteudo-programatico", CriarConteudoProgramatico.read);
+routes.post(
+  "/criar-conteudo-programatico",
+  checkToken,
+  CriarConteudoProgramatico.create
+);
+routes.get(
+  "/buscar-conteudo-programatico",
+  checkToken,
+  CriarConteudoProgramatico.read
+);
 
-routes.post("/validar-certificado", ValidarCertificado.search);
+routes.post("/validar-certificado", checkToken, ValidarCertificado.search);
 
 module.exports = routes;

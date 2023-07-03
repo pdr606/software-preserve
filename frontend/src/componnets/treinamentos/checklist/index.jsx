@@ -8,6 +8,13 @@ import styles from "./styles.module.css";
 import Select from "../../../hook/select";
 import Loading from "../../../img/Loading2.gif";
 
+const buscarMaterial = async (token, setCheckList) => {
+  const response = await api.get("/material", {
+    headers: { authorization: `Bearer ${token}` },
+  });
+  setCheckList(response.data);
+};
+
 function Checklist() {
   const [checklist, setCheckList] = useState([]);
   const [notes, setAllNotes] = useState([]);
@@ -25,12 +32,19 @@ function Checklist() {
 
     try {
       setLoading(true);
-      const response = await api.post("/material-criar", {
-        treinamento,
-        kit,
-        dataSaida,
-        observacao,
-      });
+      const response = await api.post(
+        "/material-criar",
+        {
+          treinamento,
+          kit,
+          dataSaida,
+          observacao,
+        },
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+
       setCheckList([...checklist, response.data]);
     } catch (error) {
       console.log(error);
@@ -44,27 +58,22 @@ function Checklist() {
   };
 
   const handleUpdate = async (id) => {
-    console.log("Rodei");
-    try {
-      const response = await api.put(`material-update/${id}`, {
+    await api.put(
+      `material-update/${id}`,
+      {
         dataEntrega,
-      });
-      buscarMaterial();
-      console.log(response);
-    } catch (err) {
-      console.log("Error");
-    }
-  };
+      },
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
+    );
 
-  const buscarMaterial = async () => {
-    const response = await api.get("/material");
-    setCheckList(response.data);
-    console.log(response);
+    buscarMaterial(token, setCheckList);
   };
 
   useEffect(() => {
-    buscarMaterial();
-  }, []);
+    buscarMaterial(token, setCheckList);
+  }, [token]);
 
   useEffect(() => {
     const getAllNotes = async () => {
