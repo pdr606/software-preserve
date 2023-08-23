@@ -43,12 +43,10 @@ routes.get("/buscar-instrutor", checkToken, CriarInstrutor.read);
 
 routes.post(
   "/criar-conteudo-programatico",
-  checkToken,
   CriarConteudoProgramatico.create
 );
 routes.get(
   "/buscar-conteudo-programatico",
-  checkToken,
   CriarConteudoProgramatico.read
 );
 

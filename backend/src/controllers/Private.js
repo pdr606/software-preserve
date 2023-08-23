@@ -7,6 +7,12 @@ module.exports = {
     async private(req, res){
         const id = req.params.id
 
+        let nome = "Pedro"
+
+        cons
+
+
+
         const user = await User.findById(id, '-password')
 
         if(!user){

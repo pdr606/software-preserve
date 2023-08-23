@@ -139,7 +139,7 @@ function Certificado() {
               <Select
                 className={styles.Select}
                 text="Curso"
-                options={["NR-06", "NR-10", "NR-35"]}
+                options={["NR-06", "NR-10", "NR-35", "NR-18"]}
                 setValue={setCurso}
                 value={curso}
               />
